@@ -29,7 +29,6 @@ mkdir -p v8
 cd v8
 
 echo "=====[ Fetching V8 ]====="
-fetch v8
 echo "target_os = ['mac']" >>.gclient
 cd ~/v8/v8
 git checkout $VERSION

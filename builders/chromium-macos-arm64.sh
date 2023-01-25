@@ -26,7 +26,6 @@ mkdir -p chromium
 cd chromium
 
 echo "=====[ Fetching V8 ]====="
-fetch chromium
 echo "target_os = ['mac']" >>.gclient
 cd ~/chromium/chromium
 git checkout $VERSION

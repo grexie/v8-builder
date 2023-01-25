@@ -26,7 +26,6 @@ mkdir -p webrtc
 cd webrtc
 
 echo "=====[ Fetching V8 ]====="
-fetch webrtc
 echo "target_os = ['mac']" >>.gclient
 cd ~/webrtc/webrtc
 git checkout $VERSION

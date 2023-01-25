@@ -173,7 +173,7 @@ jobs:
             ~/v8/v8/out.gn/arm64.release/torque
 
   build_webrtc_macos_arm64:
-    name: macOS arm64
+    name: WebRTC macOS arm64
     runs-on: macos-10.15
     needs: version_reader
     steps:
