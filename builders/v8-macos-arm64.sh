@@ -11,8 +11,24 @@ cd ~
 echo "=====[ Getting Depot Tools ]====="	
 git clone -q https://chromium.googlesource.com/chromium/tools/depot_tools.git || true
 export PATH=$(pwd)/depot_tools:$PATH
-gclient
-
+gclient config --spec 'solutions = [
+  {
+    "name": "v8",
+    "url": "https://chromium.googlesource.com/v8/v8.git",
+    "deps_file": "DEPS",
+    "managed": False,
+    "custom_deps": {},
+  },
+  {
+    "name": "chromium",
+    "url": "https://chromium.googlesource.com/src.git"
+  },
+  {
+    "name": "webrtc",
+    "url":"https://webrtc.googlesource.com/src.git"
+  }
+]
+' 
 
 mkdir -p v8
 cd v8
@@ -20,6 +36,7 @@ cd v8
 echo "=====[ Fetching V8 ]====="
 fetch v8
 fetch webcrypto
+fetch webrtc
 echo "target_os = ['mac']" >> .gclient
 cd ~/v8/v8
 git checkout $VERSION
