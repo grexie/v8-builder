@@ -23,13 +23,17 @@ gclient config --spec 'solutions = [
   }
 ]
 '
-gclient sync
 
 mkdir -p v8
 cd v8
 
+
+
+
+
 echo "=====[ Fetching V8 ]====="
 echo "target_os = ['mac']" >>.gclient
+gclient sync
 cd ~/v8/v8
 git checkout $VERSION
 gclient sync

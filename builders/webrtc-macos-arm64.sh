@@ -20,12 +20,12 @@ gclient config --spec 'solutions = [
   }
 ]
 '
-gclient sync
 
 mkdir -p webrtc
 cd webrtc
 
 echo "=====[ Fetching V8 ]====="
+gclient sync
 echo "target_os = ['mac']" >>.gclient
 cd ~/webrtc/webrtc
 git checkout $VERSION

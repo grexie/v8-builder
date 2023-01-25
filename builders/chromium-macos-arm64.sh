@@ -20,12 +20,14 @@ gclient config --spec 'solutions = [
   }
 ]
 '
-gclient sync
 
 mkdir -p chromium
 cd chromium
 
+
+
 echo "=====[ Fetching V8 ]====="
+gclient sync
 echo "target_os = ['mac']" >>.gclient
 cd ~/chromium/chromium
 git checkout $VERSION
