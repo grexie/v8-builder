@@ -149,8 +149,8 @@ jobs:
           ~/v8/v8/out.gn/x64.release/mksnapshot
           ~/v8/v8/out.gn/x64.release/torque
 
-  build_macos:
-    name: macOS
+  build_macos_arm64:
+    name: macOS arm64
     runs-on: macos-10.15
     needs: version_reader
     steps:
