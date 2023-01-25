@@ -149,6 +149,28 @@ jobs:
           ~/v8/v8/out.gn/x64.release/mksnapshot
           ~/v8/v8/out.gn/x64.release/torque
 
+  build_macos:
+    name: macOS
+    runs-on: macos-10.15
+    needs: version_reader
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./builders/v8-macos-arm64.sh ${{ needs.version_reader.outputs.v8_version }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: macos
+        path: |
+          ~/v8/v8/out.gn/x64.release/*.dylib
+          ~/v8/v8/out.gn/x64.release/*.a
+          ~/v8/v8/out.gn/x64.release/*.dat
+          ~/v8/v8/out.gn/x64.release/bytecode_builtins_list_generator
+          ~/v8/v8/out.gn/x64.release/gen-regexp-special-case
+          ~/v8/v8/out.gn/x64.release/mksnapshot
+          ~/v8/v8/out.gn/x64.release/torque
+
   build_windows:
     name: Windows
     runs-on: windows-2019
