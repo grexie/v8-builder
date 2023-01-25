@@ -32,6 +32,7 @@ target_os = "mac"
 is_component_build = true
 use_custom_libcxx = false
 v8_enable_i18n_support = true
+v8_static_library = true
 v8_use_external_startup_data = false
 symbol_level = 0
 '
