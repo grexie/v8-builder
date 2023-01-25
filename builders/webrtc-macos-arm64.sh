@@ -15,23 +15,20 @@ git clone -q https://chromium.googlesource.com/chromium/tools/depot_tools.git ||
 export PATH=$(pwd)/depot_tools:$PATH
 gclient config --spec 'solutions = [
   {
-    "name": "v8",
-    "url": "https://chromium.googlesource.com/v8/v8.git",
-    "deps_file": "DEPS",
-    "managed": False,
-    "custom_deps": {},
+    "name": "webrtc",
+    "url":"https://webrtc.googlesource.com/src.git"
   }
 ]
 '
 gclient sync
 
-mkdir -p v8
-cd v8
+mkdir -p webrtc
+cd webrtc
 
 echo "=====[ Fetching V8 ]====="
-fetch v8
+fetch webrtc
 echo "target_os = ['mac']" >>.gclient
-cd ~/v8/v8
+cd ~/webrtc/webrtc
 git checkout $VERSION
 gclient sync
 
@@ -47,4 +44,4 @@ v8_use_external_startup_data = false
 symbol_level = 0
 '
 ninja -C out.gn/arm64.release -t clean
-ninja -C out.gn/arm64.release v8
+ninja -C out.gn/arm64.release webrtc
