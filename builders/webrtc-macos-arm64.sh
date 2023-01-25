@@ -13,6 +13,11 @@ cd ~
 echo "=====[ Getting Depot Tools ]====="	
 git clone -q https://chromium.googlesource.com/chromium/tools/depot_tools.git || true
 export PATH=$(pwd)/depot_tools:$PATH
+
+
+mkdir -p webrtc
+cd webrtc
+
 gclient config --spec 'solutions = [
   {
     "name": "webrtc",
@@ -20,9 +25,6 @@ gclient config --spec 'solutions = [
   }
 ]
 '
-
-mkdir -p webrtc
-cd webrtc
 
 echo "=====[ Fetching V8 ]====="
 gclient sync
