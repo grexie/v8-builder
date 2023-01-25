@@ -165,7 +165,7 @@ jobs:
           name: v8-macos-arm64
           path: |
             ~/v8/v8/out.gn/arm64.release/*.dylib
-            ~/v8/v8/out.gn/arm64.release/*.a
+            ~/v8/v8/out.gn/arm64.release/obj/*.a
             ~/v8/v8/out.gn/arm64.release/*.dat
             ~/v8/v8/out.gn/arm64.release/bytecode_builtins_list_generator
             ~/v8/v8/out.gn/arm64.release/gen-regexp-special-case
@@ -187,7 +187,7 @@ jobs:
           name: webrtc-macos-arm64
           path: |
             ~/webrtc/webrtc/out.gn/arm64.release/*.dylib
-            ~/webrtc/webrtc/out.gn/arm64.release/*.a
+            ~/webrtc/webrtc/out.gn/arm64.release/obj/*.a
             ~/webrtc/webrtc/out.gn/arm64.release/*.dat
             ~/webrtc/webrtc/out.gn/arm64.release/bytecode_builtins_list_generator
             ~/webrtc/webrtc/out.gn/arm64.release/gen-regexp-special-case
@@ -209,7 +209,7 @@ jobs:
           name: chromium-macos-arm64
           path: |
             ~/chromium/chromium/out.gn/arm64.release/*.dylib
-            ~/chromium/chromium/out.gn/arm64.release/*.a
+            ~/chromium/chromium/out.gn/arm64.release/obj/*.a
             ~/chromium/chromium/out.gn/arm64.release/*.dat
             ~/chromium/chromium/out.gn/arm64.release/bytecode_builtins_list_generator
             ~/chromium/chromium/out.gn/arm64.release/gen-regexp-special-case

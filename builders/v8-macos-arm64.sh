@@ -43,12 +43,14 @@ gclient sync
 echo "=====[ Building V8 ]====="
 python ./tools/dev/v8gen.py arm64.release -vv -- '
 target_os = "mac"
+is_clang=true
 is_component_build = false
 use_custom_libcxx = false
 v8_enable_i18n_support = true
 v8_static_library = true
 v8_use_external_startup_data = false
 target_cpu = "arm64"
+v8_target_cpu = "arm64"
 symbol_level = 0
 '
 ninja -C out.gn/arm64.release -t clean
