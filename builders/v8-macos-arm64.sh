@@ -13,6 +13,10 @@ cd ~
 echo "=====[ Getting Depot Tools ]====="	
 git clone -q https://chromium.googlesource.com/chromium/tools/depot_tools.git || true
 export PATH=$(pwd)/depot_tools:$PATH
+
+mkdir -p v8
+cd v8
+
 gclient config --spec 'solutions = [
   {
     "name": "v8",
@@ -23,9 +27,6 @@ gclient config --spec 'solutions = [
   }
 ]
 '
-
-mkdir -p v8
-cd v8
 
 
 
