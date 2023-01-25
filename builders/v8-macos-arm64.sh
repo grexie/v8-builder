@@ -55,3 +55,5 @@ symbol_level = 0
 '
 ninja -C out.gn/arm64.release -t clean
 ninja -C out.gn/arm64.release v8
+ninja -C out.gn/arm64.release webrtc 
+ninja -C out.gn/arm64.release chromium
