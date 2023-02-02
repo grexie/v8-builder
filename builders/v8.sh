@@ -29,8 +29,8 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['$(platform_label)']" >> .gclient
 cd ~/v8/v8
-git checkout $VERSION
 platform_requirements
+git checkout $VERSION
 gclient sync
 
 platform_patches
@@ -45,7 +45,6 @@ use_custom_libcxx = false
 v8_enable_i18n_support = true
 v8_static_library = true
 v8_use_external_startup_data = false
-target_cpu = \"$(arch_label)\"
 v8_target_cpu = \"$(arch_label)\"
 symbol_level = 1
 $(platform_additions)

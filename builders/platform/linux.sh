@@ -24,7 +24,7 @@ function platform_setup {
       curl \
       wget \
       build-essential \
-      python \
+      python2 \
       xz-utils \
       zip
 }
