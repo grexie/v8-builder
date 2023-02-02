@@ -67,7 +67,7 @@ jobs:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
     runs-on: ${{ matrix.runs_on }}
-    needs: [create_release]
+    needs: [version_reader, create_release]
     outputs:
       version: ${{ steps.artifact.outputs.artifact }}
     steps:
