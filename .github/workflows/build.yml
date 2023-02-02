@@ -75,7 +75,7 @@ jobs:
       - id: artifact
         run: |
           cd $GITHUB_WORKSPACE
-          echo "::set-output name=artifact::v8-${{ matrix.platform }}-${{ matrix-arch }}-${{ matrix.scheme }}"
+          echo "::set-output name=artifact::v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}"
      
             
   headers:
