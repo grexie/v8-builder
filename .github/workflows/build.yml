@@ -25,51 +25,51 @@ jobs:
   build:
     strategy:
       matrix:
-        scheme: [release]
-        platform: [macos, linux]
-        arch: [arm64, x64]
+        scheme_slug: [release]
+        platform_slug: [macos, linux]
+        arch_slug: [arm64, x64]
         include:
-          - platform: macos
+          - platform_slug: macos
             platform_name: macOS
-            runs_on: macos-latest
-          - platform: android
+            os: macos-latest
+          - platform_slug: android
             platform_name: Android
-            runs_on: ubuntu-latest
-          - platform: linux
+            os: ubuntu-latest
+          - platform_slug: linux
             platform_name: Linux
-            runs_on: ubuntu-latest
-          - platform: windows
+            os: ubuntu-latest
+          - platform_slug: windows
             platform_name: Windows
-            runs_on: windows-latest
-          - arch: arm64
+            os: windows-latest
+          - arch_slug: arm64
             arch_name: ARM64
-          - arch: x64
+          - arch_slug: x64
             arch_name: x86-64
-          - arch: x86
+          - arch_slug: x86
             arch_name: x86
-          - arch: arm
+          - arch_slug: arm
             arch_name: ARM v7
-          - scheme: release
+          - scheme_slug: release
             scheme_name: Release
-          - scheme: debug
+          - scheme_slug: debug
             scheme_name: Debug
         exclude:
-          - platform: windows
-            arch: arm64
-          - platform: windows
-            arch: arm
-          - platform: macos
-            arch: arm
-          - platform: macos
-            arch: x86
+          - platform_slug: windows
+            arch_slug: arm64
+          - platform_slug: windows
+            arch_slug: arm
+          - platform_slug: macos
+            arch_slug: arm
+          - platform_slug: macos
+            arch_slug: x86
 
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
-    runs-on: ${{ matrix.runs_on }}
+    runs-on: ${{ matrix.os }}
     needs: [version_reader, create_release]
     outputs:
-      version: ${{ steps.artifact.outputs.artifact }}
+      artifact: ${{ steps.artifact.outputs.artifact }}
     steps:
       - uses: actions/checkout@v2
       - name: Run build script
@@ -78,18 +78,19 @@ jobs:
           sh ./builders/v8.sh
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
-          SCHEME: ${{ matrix.scheme }}
-          PLATFORM: ${{ matrix.platform }}
-          ARCH: ${{ matrix.arch }}
+          SCHEME: ${{ matrix.scheme_slug }}
+          PLATFORM: ${{ matrix.platform_slug }}
+          ARCH: ${{ matrix.arch_slug }}
       - uses: actions/upload-artifact@v2
         with:
           name:
-            v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}
+            v8-${{ matrix.platform_slug }}-${{ matrix.arch_slug }}-${{
+            matrix.scheme_slug }}
           path: ~/v8/v8.zip
       - id: artifact
         run: |
           cd $GITHUB_WORKSPACE
-          echo "::set-output name=artifact::v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}"
+          echo "::set-output name=artifact::v8-${{ matrix.platform_slug }}-${{ matrix.arch_slug }}-${{ matrix.scheme_slug }}"
 
   headers:
     name: Headers and Documentation
