@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+ROOTDIR=$(pwd)
+
 . builders/platform/${PLATFORM}.sh
 . builders/arch/${ARCH}.sh
 . builders/scheme/${SCHEME}.sh

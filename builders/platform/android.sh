@@ -34,13 +34,13 @@ function platform_requirements {
 }
 
 function platform_additions {
-
+  echo -n
 }
 
 function platform_patches {
-
+  echo -n
 }
 
 function platform_build {
-  
+  echo -n
 }

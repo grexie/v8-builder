@@ -4,7 +4,7 @@ function build_dir {
 }
 
 function platform_setup {
-
+  echo -n
 }
 
 function platform_label {
@@ -21,17 +21,17 @@ function copy_assets {
 }
 
 function platform_requirements {
- 
+  echo -n
 }
 
 function platform_additions {
-
+  echo -n
 }
 
 function platform_patches {
-
+  echo -n
 }
 
 function platform_build {
-
+  echo -n
 }

@@ -4,11 +4,11 @@ function arch_label {
 }
 
 function arch_patches {
-
+  echo -n
 }
 
 function arch_additions {
-
+  echo -n
 }
 
 
