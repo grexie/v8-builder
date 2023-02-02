@@ -54,11 +54,9 @@ jobs:
           - scheme: debug
             scheme-name: Debug
 
-    name:
-      ${{ matrix.scheme_name }} Build ${{ matrix.platform_name }} ${{
-      matrix.arch_name }}
+    name: Build
     runs-on: ${{ matrix.runs_on }}
-    needs: [create-release]
+    needs: [create_release]
     outputs:
       version: ${{ steps.artifact.outputs.artifact }}
     steps:
@@ -85,7 +83,7 @@ jobs:
   headers:
     name: Headers and Documentation
     runs-on: ubuntu-18.04
-    needs: version_reader
+    needs: [create_release, version_reader]
     steps:
       - uses: actions/checkout@v2
       - name: Generate documentation
@@ -105,7 +103,7 @@ jobs:
           name: documentation
           path: "~/docs"
 
-  create-release:
+  create_release:
     name: Create Release
     runs-on: ubuntu-latest
     needs: [version_reader]
@@ -123,7 +121,7 @@ jobs:
 
   upload-release:
     name: Upload Release
-    needs: [build, version_reader, create-release]
+    needs: [build, version_reader, create_release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -143,7 +141,7 @@ jobs:
 
   upload-docs:
     name: Upload Documentation and Headers
-    needs: [headers, create-release]
+    needs: [headers, create_release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
