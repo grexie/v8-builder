@@ -31,30 +31,32 @@ jobs:
         include:
           - platform: macos
             platform-name: macOS
-            runs-on: macos-latest
+            runs_on: macos-latest
           - platform: android
             platform-name: Android
-            runs-on: ubuntu-latest
+            runs_on: ubuntu-latest
           - platform: linux
             platform-name: Linux
-            runs-on: ubuntu-latest
+            runs_on: ubuntu-latest
           - name: windows
             platform-name: Windows
-            runs-on: windows-latest
+            runs_on: windows-latest
           - arch: arm64
             arch-name: ARM64
           - arch: x64
-            arch-name: x86-64
+            arch_name: x86-64
           - arch: x86
-            arch-name: x86
+            arch_name: x86
           - arch: arm
-            arch-name: ARM v7
+            arch_name: ARM v7
           - scheme: release
-            scheme-name: Release
+            scheme_name: Release
           - scheme: debug
-            scheme-name: Debug
+            scheme_name: Debug
 
-    name: Build
+    name:
+      Build ${{ matrix.schema_name }} ${{ matrix.platform_name }} ${{
+      matrix.arch_name }}
     runs-on: ${{ matrix.runs_on }}
     needs: [create_release]
     outputs:
@@ -119,7 +121,7 @@ jobs:
           draft: true
           prerelease: false
 
-  upload-release:
+  upload_release:
     name: Upload Release
     needs: [build, version_reader, create_release]
     runs-on: ubuntu-latest
