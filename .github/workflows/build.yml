@@ -25,6 +25,8 @@ jobs:
   build:
     strategy:
       matrix:
+        platform_slug: [macos, linux]
+        arch_slug: [arm64, x64]
         include:
           - platform_slug: macos
             platform_name: macOS
