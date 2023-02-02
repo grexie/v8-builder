@@ -1,12 +1,12 @@
-function build_dir() {
+function build_dir {
   echo -n ~/v8/v8/out.gn/$(arch).$(scheme)
 }
 
-function platform_label() {
+function platform_label {
   echo -n "android"
 }
 
-function copy_assets() {
+function copy_assets {
   find $(build_dir) -type f -name "*.so"
   find $(build_dir) -type f -name "*.a"
   find $(build_dir) -type f -name "*.dat"
@@ -16,7 +16,7 @@ function copy_assets() {
   echo -n $(build_dir)/clang_*/torque
 }
 
-function platform_setup() {
+function platform_setup {
   sudo apt-get install -y \
       pkg-config \
       git \
@@ -29,18 +29,18 @@ function platform_setup() {
       zip
 }
 
-function platform_requirements() {
+function platform_requirements {
   ./build/install-build-deps-android.sh
 }
 
-function platform_additions() {
+function platform_additions {
 
 }
 
-function platform_patches() {
+function platform_patches {
 
 }
 
-function platform_build() {
+function platform_build {
   
 }

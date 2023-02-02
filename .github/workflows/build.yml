@@ -67,7 +67,7 @@ jobs:
       - name: Run build script
         run: |
           cd $GITHUB_WORKSPACE
-          sh ./builders/v8.sh
+          bash ./builders/v8.sh
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
           SCHEME: ${{ matrix.scheme }}
