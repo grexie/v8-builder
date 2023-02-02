@@ -55,13 +55,13 @@ jobs:
             scheme_name: Debug
         exclude:
           - platform: windows
-            arch_name: arm64
+            arch: arm64
           - platform: windows
-            arch_name: arm
+            arch: arm
           - platform: macos
-            arch_name: arm
+            arch: arm
           - platform: macos
-            arch_name: x86
+            arch: x86
 
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
