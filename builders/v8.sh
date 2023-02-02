@@ -1,3 +1,4 @@
+#!/bin/bash -x
 
 . builders/platform/${PLATFORM}.sh
 . builders/arch/${ARCH}.sh
