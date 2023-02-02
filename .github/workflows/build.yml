@@ -30,19 +30,19 @@ jobs:
         arch: [arm64, x64, x86, arm]
         include:
           - platform: macos
-            platform-name: macOS
+            platform_name: macOS
             runs_on: macos-latest
           - platform: android
-            platform-name: Android
+            platform_name: Android
             runs_on: ubuntu-latest
           - platform: linux
-            platform-name: Linux
+            platform_name: Linux
             runs_on: ubuntu-latest
           - name: windows
-            platform-name: Windows
+            platform_name: Windows
             runs_on: windows-latest
           - arch: arm64
-            arch-name: ARM64
+            arch_name: ARM64
           - arch: x64
             arch_name: x86-64
           - arch: x86
