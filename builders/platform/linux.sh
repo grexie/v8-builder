@@ -1,5 +1,5 @@
 function build_dir {
-  echo -n ~/v8/v8/out.gn/${ARCH}.${SCHEME}
+  echo -n ~/v8/v8/out.gn/$(arch_label).$(scheme_label)
 }
 
 function platform_label {
@@ -26,7 +26,8 @@ function platform_setup {
       build-essential \
       python2 \
       xz-utils \
-      zip
+      zip \
+      ninja-build
 }
 
 function platform_requirements {

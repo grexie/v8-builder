@@ -1,5 +1,5 @@
 function build_dir {
-  echo -n ~/v8/v8/out.gn/${ARCH}.${SCHEME}
+  echo -n ~/v8/v8/out.gn/$(arch_label).$(scheme_label)
 }
 
 function platform_label {
@@ -17,7 +17,7 @@ function copy_assets {
 }
 
 function platform_setup {
-  echo -n
+  brew install ninja
 }
 
 function platform_requirements {
