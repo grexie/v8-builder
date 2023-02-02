@@ -63,7 +63,7 @@ jobs:
       - name: Run build script
         run: |
           cd $GITHUB_WORKSPACE
-          sh ./builders/v8.sh ${{ needs.version_reader.outputs.v8_version }}
+          sh ./builders/v8.sh ${{ needs.version_reader.outputs.version }}
         env:
           SCHEME: ${{ matrix.scheme }}
           PLATFORM: ${{ matrix.platform }}
@@ -87,7 +87,7 @@ jobs:
       - name: Generate documentation
         run: |
           cd $GITHUB_WORKSPACE
-          sh ./builders/v8-docs.sh ${{ needs.version_reader.outputs.v8_version }}
+          sh ./builders/v8-docs.sh ${{ needs.version_reader.outputs.version }}
       - uses: actions/upload-artifact@v2
         with:
           name: headers
@@ -112,9 +112,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ needs.version_reader.outputs.v8_version }}
+          tag_name: ${{ needs.version_reader.outputs.version }}
           release_name:
-            v${{ needs.version_reader.outputs.v8_version }}
+            v${{ needs.version_reader.outputs.version }}
           draft: true
           prerelease: false
         
@@ -136,7 +136,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ needs.build.outputs.artifact }}.zip
-          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.v8_version }}.zip
+          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
 
   upload-docs:
@@ -157,5 +157,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ needs.build.outputs.artifact }}.zip
-          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.v8_version }}.zip
+          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
