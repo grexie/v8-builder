@@ -25,7 +25,7 @@ jobs:
   build:
     strategy:
       matrix:
-        scheme: [release]
+        scheme: [release, debug]
         platform: [macos, linux, windows, android]
         arch: [arm64, x64, x86, arm]
         include:
@@ -53,8 +53,10 @@ jobs:
             scheme-name: Release
           - scheme: debug
             scheme-name: Debug
-    
-    name: ${{ matrix.scheme_name }} Build ${{ matrix.platform_name }} ${{ matrix.arch_name }}
+
+    name:
+      ${{ matrix.scheme_name }} Build ${{ matrix.platform_name }} ${{
+      matrix.arch_name }}
     runs-on: ${{ matrix.runs_on }}
     needs: [create-release]
     outputs:
@@ -64,21 +66,22 @@ jobs:
       - name: Run build script
         run: |
           cd $GITHUB_WORKSPACE
-          sh ./builders/v8.sh ${{ needs.version_reader.outputs.version }}
+          sh ./builders/v8.sh 
         env:
+          VERSION: ${{ needs.version_reader.outputs.version }}
           SCHEME: ${{ matrix.scheme }}
           PLATFORM: ${{ matrix.platform }}
           ARCH: ${{ matrix.arch }}
       - uses: actions/upload-artifact@v2
         with:
-          name: v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}
-          path: ${{ matrix.assets }}
+          name:
+            v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}
+          path: ~/v8/v8.zip
       - id: artifact
         run: |
           cd $GITHUB_WORKSPACE
           echo "::set-output name=artifact::v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}"
-     
-            
+
   headers:
     name: Headers and Documentation
     runs-on: ubuntu-18.04
@@ -102,7 +105,6 @@ jobs:
           name: documentation
           path: "~/docs"
 
-          
   create-release:
     name: Create Release
     runs-on: ubuntu-latest
@@ -115,11 +117,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ needs.version_reader.outputs.version }}
-          release_name:
-            v${{ needs.version_reader.outputs.version }}
+          release_name: v${{ needs.version_reader.outputs.version }}
           draft: true
           prerelease: false
-        
+
   upload-release:
     name: Upload Release
     needs: [build, version_reader, create-release]
@@ -128,17 +129,14 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: ${{ needs.build.outputs.artifact }}
-      - name: Build Archive
-        run: |
-          zip -r ${{ needs.build.outputs.artifact }}.zip ${{ needs.build.outputs.artifact }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ needs.build.outputs.artifact }}.zip
-          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.version }}.zip
+          asset_path: v8.zip
+          asset_name: v8-${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
 
   upload-docs:
@@ -148,16 +146,42 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          path: ${{ needs.build.outputs.artifact }}
+          path: docs
+      - uses: actions/download-artifact@v2
+        with:
+          path: headers
+      - uses: actions/download-artifact@v2
+        with:
+          path: license
       - name: Build Archive
         run: |
-          zip -r ${{ needs.build.outputs.artifact }}.zip ${{ needs.build.outputs.artifact }}
+          zip -r docs.zip docs
+          zip -r headers.zip headers
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ needs.build.outputs.artifact }}.zip
-          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.version }}.zip
+          asset_path: docs.zip
+          asset_name:
+            v8-docs-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
+            - name: Upload Release Asset
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: headers.zip
+          asset_name: v8-headers-${{ needs.version_reader.outputs.version }}.zip
+          asset_content_type: application/zip
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: license
+          asset_name: LICENSE
+          asset_content_type: text/plain
