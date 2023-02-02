@@ -24,225 +24,92 @@ jobs:
           echo "::set-output name=v8_version::$(<./V8_VERSION)"
           echo "::set-output name=chromium_version::$(<./CHROMIUM_VERSION)"
 
-  # build_linux:
-  #   name: Linux
-  #   runs-on: ubuntu-18.04
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       sh ./builders/v8-linux.sh ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: linux_x86-64
-  #       path: |
-  #         ~/v8/v8/out.gn/x64.release/*.so
-  #         ~/v8/v8/out.gn/x64.release/*.dat
-  #         ~/v8/v8/out.gn/x64.release/bytecode_builtins_list_generator
-  #         ~/v8/v8/out.gn/x64.release/gen-regexp-special-case
-  #         ~/v8/v8/out.gn/x64.release/mksnapshot
-  #         ~/v8/v8/out.gn/x64.release/torque
-
-  # build_android_arm_v8:
-  #   name: Android (arm64-v8a)
-  #   runs-on: ubuntu-18.04
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       sh ./builders/v8-android-arm-v8.sh ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: android_arm64-v8a
-  #       path: |
-  #         ~/v8/v8/out.gn/arm64.release/*.so
-  #         ~/v8/v8/out.gn/arm64.release/*.dat
-  #         ~/v8/v8/out.gn/arm64.release/clang_*/bytecode_builtins_list_generator
-  #         ~/v8/v8/out.gn/arm64.release/clang_*/gen-regexp-special-case
-  #         ~/v8/v8/out.gn/arm64.release/clang_*/mksnapshot
-  #         ~/v8/v8/out.gn/arm64.release/clang_*/torque
-
-  # build_android_arm_v7:
-  #   name: Android (armeabi-v7a)
-  #   runs-on: ubuntu-18.04
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       sh ./builders/v8-android-arm-v7.sh ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: android_armeabi-v7a
-  #       path: |
-  #         ~/v8/v8/out.gn/arm.release/*.so
-  #         ~/v8/v8/out.gn/arm.release/*.dat
-  #         ~/v8/v8/out.gn/arm.release/clang_*/bytecode_builtins_list_generator
-  #         ~/v8/v8/out.gn/arm.release/clang_*/gen-regexp-special-case
-  #         ~/v8/v8/out.gn/arm.release/clang_*/mksnapshot
-  #         ~/v8/v8/out.gn/arm.release/clang_*/torque
-
-  # build_android_x86_64:
-  #   name: Android (x86-64)
-  #   runs-on: ubuntu-18.04
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       sh ./builders/v8-android-x86-64.sh ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: android_x86-64
-  #       path: |
-  #         ~/v8/v8/out.gn/x64.release/*.so
-  #         ~/v8/v8/out.gn/x64.release/*.dat
-  #         ~/v8/v8/out.gn/x64.release/clang_*/bytecode_builtins_list_generator
-  #         ~/v8/v8/out.gn/x64.release/clang_*/gen-regexp-special-case
-  #         ~/v8/v8/out.gn/x64.release/clang_*/mksnapshot
-  #         ~/v8/v8/out.gn/x64.release/clang_*/torque
-
-  # build_android_x86:
-  #   name: Android (x86)
-  #   runs-on: ubuntu-18.04
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       sh ./builders/v8-android-x86.sh ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: android_x86
-  #       path: |
-  #         ~/v8/v8/out.gn/ia32.release/*.so
-  #         ~/v8/v8/out.gn/ia32.release/*.dat
-  #         ~/v8/v8/out.gn/ia32.release/clang_*/bytecode_builtins_list_generator
-  #         ~/v8/v8/out.gn/ia32.release/clang_*/gen-regexp-special-case
-  #         ~/v8/v8/out.gn/ia32.release/clang_*/mksnapshot
-  #         ~/v8/v8/out.gn/ia32.release/clang_*/torque
-
-  # build_macos:
-  #   name: macOS
-  #   runs-on: macos-10.15
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     run: |
-  #       cd $GITHUB_WORKSPACE
-  #       sh ./builders/v8-macos.sh ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: macos
-  #       path: |
-  #         ~/v8/v8/out.gn/x64.release/*.dylib
-  #         ~/v8/v8/out.gn/x64.release/*.dat
-  #         ~/v8/v8/out.gn/x64.release/bytecode_builtins_list_generator
-  #         ~/v8/v8/out.gn/x64.release/gen-regexp-special-case
-  #         ~/v8/v8/out.gn/x64.release/mksnapshot
-  #         ~/v8/v8/out.gn/x64.release/torque
-
-  build_v8_macos_arm64:
-    name: v8 macOS arm64
-    runs-on: macos-10.15
-    needs: version_reader
+  build:
+    strategy:
+      matrix:
+        scheme: [release]
+        platform: [macos, linux, windows, android]
+        arch: [arm64, x64, x86, arm]
+        include:
+          - platform: macos
+            platform-name: macOS
+            runs-on: macos-latest
+            assets: |
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.dylib
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/**/*.a
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.dat
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/bytecode_builtins_list_generator
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/gen-regexp-special-case
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/mksnapshot
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/torque
+          - platform: android
+            platform-name: Android
+            runs-on: ubuntu-latest
+            assets: |
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.so
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/**/*.a
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.dat
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/clang_*/bytecode_builtins_list_generator
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/clang_*/gen-regexp-special-case
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/clang_*/mksnapshot
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/clang_*/torque
+          - platform: linux
+            platform-name: Linux
+            runs-on: ubuntu-latest
+            assets: |
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.so
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/**/*.a
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.dat
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/bytecode_builtins_list_generator
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/gen-regexp-special-case
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/mksnapshot
+              ~/v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/torque
+          - name: windows
+            platform-name: Windows
+            runs-in: windows-latest
+            assets: |
+              v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.dll
+              v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.lib
+              v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.exp
+              v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.ilk
+              v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.exe
+              v8/v8/out.gn/${{ matrix.arch.slug }}.${{ matrix.arch.scheme }}/*.dat
+          - arch: arm64
+            arch-name: ARM64
+          - arch: x64
+            arch-name: x86-64
+          - arch: x86
+            arch-name: x86
+          - arch: arm
+            arch-name: ARM v7
+          - scheme: release
+            scheme-name: Release
+          - scheme: debug
+            scheme-name: Debug
+    
+    name: ${{ matrix.scheme-name }} Build ${{ matrix.platform-name }} ${{ matrix.arch-name }}
+    runs-on: ${{ matrix.runs-on }}
     steps:
       - uses: actions/checkout@v2
       - name: Run build script
         run: |
           cd $GITHUB_WORKSPACE
-          sh ./builders/v8-macos-arm64.sh ${{ needs.version_reader.outputs.v8_version }}
+          sh ./builders/v8.sh ${{ needs.version_reader.outputs.v8_version }}
+        env:
+          SCHEME: ${{ matrix.scheme }}
+          PLATFORM: ${{ matrix.platform }}
+          ARCH: ${{ matrix.arch }}
       - uses: actions/upload-artifact@v2
         with:
-          name: v8-macos-arm64
-          path: |
-            ~/v8/v8/out.gn/arm64.release/*.dylib
-            ~/v8/v8/out.gn/arm64.release/obj/*.a
-            ~/v8/v8/out.gn/arm64.release/obj/**/*.a
-            ~/v8/v8/out.gn/arm64.release/*.dat
-            ~/v8/v8/out.gn/arm64.release/bytecode_builtins_list_generator
-            ~/v8/v8/out.gn/arm64.release/gen-regexp-special-case
-            ~/v8/v8/out.gn/arm64.release/mksnapshot
-            ~/v8/v8/out.gn/arm64.release/torque
-
-  build_webrtc_macos_arm64:
-    name: WebRTC macOS arm64
-    runs-on: macos-10.15
-    needs: version_reader
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run build script
+          name: v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme }}
+          path: ${{ matrix.assets }}
+      - id: artifact
         run: |
           cd $GITHUB_WORKSPACE
-          sh ./builders/webrtc-macos-arm64.sh ${{ needs.version_reader.outputs.chromium_version }}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: webrtc-macos-arm64
-          path: |
-            ~/webrtc/webrtc/out.gn/arm64.release/*.dylib
-            ~/webrtc/webrtc/out.gn/arm64.release/obj/*.a
-            ~/webrtc/webrtc/out.gn/arm64.release/obj/**/*.a
-            ~/webrtc/webrtc/out.gn/arm64.release/*.dat
-            ~/webrtc/webrtc/out.gn/arm64.release/bytecode_builtins_list_generator
-            ~/webrtc/webrtc/out.gn/arm64.release/gen-regexp-special-case
-            ~/webrtc/webrtc/out.gn/arm64.release/mksnapshot
-            ~/webrtc/webrtc/out.gn/arm64.release/torque
-
-  build_chromium_macos_arm64:
-    name: Chromium macOS arm64
-    runs-on: macos-10.15
-    needs: version_reader
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run build script
-        run: |
-          cd $GITHUB_WORKSPACE
-          sh ./builders/chromium-macos-arm64.sh ${{ needs.version_reader.outputs.chromium_version }}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: chromium-macos-arm64
-          path: |
-            ~/chromium/chromium/out.gn/arm64.release/*.dylib
-            ~/chromium/chromium/out.gn/arm64.release/obj/*.a
-            ~/chromium/chromium/out.gn/arm64.release/obj/**/*.a
-            ~/chromium/chromium/out.gn/arm64.release/*.dat
-            ~/chromium/chromium/out.gn/arm64.release/bytecode_builtins_list_generator
-            ~/chromium/chromium/out.gn/arm64.release/gen-regexp-special-case
-            ~/chromium/chromium/out.gn/arm64.release/mksnapshot
-            ~/chromium/chromium/out.gn/arm64.release/torque
-
-  # build_windows:
-  #   name: Windows
-  #   runs-on: windows-2019
-  #   needs: version_reader
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Run build script
-  #     shell: cmd
-  #     run: |
-  #       cd %GITHUB_WORKSPACE%
-  #       call .\builders\v8-windows.cmd ${{ needs.version_reader.outputs.v8_version }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: windows
-  #       path: |
-  #         v8/v8/out.gn/x64.release/*.dll
-  #         v8/v8/out.gn/x64.release/*.pdb
-  #         v8/v8/out.gn/x64.release/*.lib
-  #         v8/v8/out.gn/x64.release/*.exp
-  #         v8/v8/out.gn/x64.release/*.ilk
-  #         v8/v8/out.gn/x64.release/*.exe
-  #         v8/v8/out.gn/x64.release/*.dat
-
-  v8_headers_and_documentation:
+          echo "::set-output name=artifact::v8-${{ matrix.platform }}-${{ matrix-arch }}-${{ matrix.scheme }}"
+     
+            
+  headers:
     name: Headers and Documentation
     runs-on: ubuntu-18.04
     needs: version_reader
@@ -265,23 +132,11 @@ jobs:
           name: documentation
           path: "~/docs"
 
-  release_v8:
-    name: Release v8
+          
+  create-release:
+    name: Create Release
     runs-on: ubuntu-latest
-    needs: [
-        # build_linux, build_android_arm_v8, build_android_arm_v7, build_android_x86_64, build_android_x86,
-        # build_macos, build_macos_arm64, build_windows,
-        version_reader,
-        build_v8_macos_arm64,
-        v8_headers_and_documentation,
-      ]
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          path: "v8"
-      - name: Make zip
-        run: |
-          zip -r v8.zip v8
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -290,93 +145,48 @@ jobs:
         with:
           tag_name: ${{ needs.version_reader.outputs.v8_version }}
           release_name:
-            V8, version ${{ needs.version_reader.outputs.v8_version }}
+            v${{ needs.version_reader.outputs.v8_version }}
           draft: true
           prerelease: false
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: v8.zip
-          asset_name: v8_${{ needs.version_reader.outputs.v8_version }}.zip
-          asset_content_type: application/zip
-
-  release_chromium:
-    name: Release Chromium
+        
+  upload-release:
+    name: Upload Release
+    needs: [build]
     runs-on: ubuntu-latest
-    needs: [
-        version_reader,
-        # build_linux, build_android_arm_v8, build_android_arm_v7, build_android_x86_64, build_android_x86,
-        # build_macos, build_macos_arm64, build_windows, headers_and_documentation
-        build_chromium_macos_arm64,
-      ]
     steps:
       - uses: actions/download-artifact@v2
         with:
-          path: "chromium"
-      - name: Make zip
+          path: ${{ needs.build.outputs.artifact }}
+      - name: Build Archive
         run: |
-          zip -r chromium.zip chromium
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ needs.version_reader.outputs.chromium_version }}
-          release_name:
-            Chromium, version ${{ needs.version_reader.outputs.chromium_version
-            }}
-          draft: true
-          prerelease: false
+          zip -r ${{ needs.build.outputs.artifact }}.zip ${{ needs.build.outputs.artifact }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: chromium.zip
-          asset_name:
-            chromium_${{ needs.version_reader.outputs.chromium_version }}.zip
+          asset_path: ${{ needs.build.outputs.artifact }}.zip
+          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.v8_version }}.zip
           asset_content_type: application/zip
 
-  release_webrtc:
-    name: Release WebRTC
+  upload-docs:
+    name: Upload Documentation and Headers
+    needs: [build]
     runs-on: ubuntu-latest
-    needs: [
-        version_reader,
-        # build_linux, build_android_arm_v8, build_android_arm_v7, build_android_x86_64, build_android_x86,
-        # build_macos, build_macos_arm64, build_windows, headers_and_documentation
-        build_webrtc_macos_arm64,
-      ]
     steps:
       - uses: actions/download-artifact@v2
         with:
-          path: "webrtc"
-      - name: Make zip
+          path: ${{ needs.build.outputs.artifact }}
+      - name: Build Archive
         run: |
-          zip -r webrtc.zip webrtc
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ needs.version_reader.outputs.chromium_version }}
-          release_name:
-            Chromium, version ${{ needs.version_reader.outputs.chromium_version
-            }}
-          draft: true
-          prerelease: false
+          zip -r ${{ needs.build.outputs.artifact }}.zip ${{ needs.build.outputs.artifact }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: webrtc.zip
-          asset_name:
-            webrtc_${{ needs.version_reader.outputs.chromium_version }}.zip
+          asset_path: ${{ needs.build.outputs.artifact }}.zip
+          asset_name: ${{ needs.build.outputs.artifact }}-${{ needs.version_reader.outputs.v8_version }}.zip
           asset_content_type: application/zip
