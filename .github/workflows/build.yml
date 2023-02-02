@@ -25,6 +25,7 @@ jobs:
   build:
     strategy:
       matrix:
+        scheme_slug: [release]
         platform_slug: [macos, linux]
         arch_slug: [arm64, x64]
         include:
@@ -52,15 +53,6 @@ jobs:
             scheme_name: Release
           - scheme_slug: debug
             scheme_name: Debug
-        exclude:
-          - platform_slug: windows
-            arch_slug: arm64
-          - platform_slug: windows
-            arch_slug: arm
-          - platform_slug: macos
-            arch_slug: arm
-          - platform_slug: macos
-            arch_slug: x86
 
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
