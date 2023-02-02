@@ -141,7 +141,7 @@ jobs:
 
   upload-docs:
     name: Upload Documentation and Headers
-    needs: [build]
+    needs: [headers]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
