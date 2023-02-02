@@ -14,15 +14,13 @@ jobs:
     name: Get version number
     runs-on: ubuntu-latest
     outputs:
-      v8_version: ${{ steps.got_version.outputs.v8_version }}
-      chromium_version: ${{ steps.got_version.outputs.chromium_version }}
+      version: ${{ steps.got_version.outputs.version }}
     steps:
       - uses: actions/checkout@v2
       - id: got_version
         run: |
           cd $GITHUB_WORKSPACE
-          echo "::set-output name=v8_version::$(<./V8_VERSION)"
-          echo "::set-output name=chromium_version::$(<./CHROMIUM_VERSION)"
+          echo "::set-output name=version::$(<./V8_VERSION)"
 
   build:
     strategy:
@@ -56,8 +54,10 @@ jobs:
           - scheme: debug
             scheme-name: Debug
     
-    name: ${{ matrix.scheme-name }} Build ${{ matrix.platform-name }} ${{ matrix.arch-name }}
-    runs-on: ${{ matrix.runs-on }}
+    name: ${{ matrix.scheme_name }} Build ${{ matrix.platform_name }} ${{ matrix.arch_name }}
+    runs-on: ${{ matrix.runs_on }}
+    outputs:
+      version: ${{ steps.artifact.outputs.artifact }}
     steps:
       - uses: actions/checkout@v2
       - name: Run build script
