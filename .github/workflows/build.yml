@@ -53,9 +53,18 @@ jobs:
             scheme_name: Release
           - scheme: debug
             scheme_name: Debug
+        exclude:
+          - platform: windows
+            arch_name: arm64
+          - platform: windows
+            arch_name: arm
+          - platform: macos
+            arch_name: arm
+          - platform: macos
+            arch_name: x86
 
     name:
-      Build ${{ matrix.schema_name }} ${{ matrix.platform_name }} ${{
+      Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
     runs-on: ${{ matrix.runs_on }}
     needs: [create_release]
