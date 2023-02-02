@@ -120,7 +120,7 @@ jobs:
         
   upload-release:
     name: Upload Release
-    needs: [build]
+    needs: [build, create-release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -141,7 +141,7 @@ jobs:
 
   upload-docs:
     name: Upload Documentation and Headers
-    needs: [headers]
+    needs: [headers, create-release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
