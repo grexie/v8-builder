@@ -111,6 +111,8 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     needs: [version_reader]
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
       - name: Create Release
         id: create_release
@@ -136,7 +138,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
           asset_path: v8.zip
           asset_name:
             v8-${{ needs.build.outputs.artifact }}-${{
@@ -150,23 +152,17 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          path: docs
-      - uses: actions/download-artifact@v2
-        with:
-          path: headers
-      - uses: actions/download-artifact@v2
-        with:
-          path: license
+          path: v8
       - name: Build Archive
         run: |
-          zip -r docs.zip docs
-          zip -r headers.zip headers
+          zip -r docs.zip v8/docs
+          zip -r headers.zip v8/headers
       - name: Upload Docs
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
           asset_path: docs.zip
           asset_name: v8-docs-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
@@ -175,7 +171,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
           asset_path: headers.zip
           asset_name: v8-headers-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
@@ -184,7 +180,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: license
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: v8/license
           asset_name: LICENSE
           asset_content_type: text/plain
