@@ -155,7 +155,7 @@ jobs:
           path: v8
       - name: Build Archive
         run: |
-          zip -r docs.zip v8/docs
+          zip -r docs.zip v8/documentation
           zip -r headers.zip v8/headers
       - name: Upload Docs
         uses: actions/upload-release-asset@v1
