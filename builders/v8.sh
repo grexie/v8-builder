@@ -57,4 +57,4 @@ ninja -C out.gn/$(arch_label).$(scheme_label) v8_libplatform
 platform_build
 arch_build
 
-zip -r ~/v8/v8.zip $(copy_assets)
+zip -j -r ~/v8/v8.zip $(copy_assets)
