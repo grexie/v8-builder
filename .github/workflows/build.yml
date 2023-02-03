@@ -98,8 +98,10 @@ jobs:
           sh ./builders/v8-docs.sh ${{ needs.version_reader.outputs.version }}
       - name: Build Archives
         run: |
-          zip -r ${{ github.workspace }}/docs.zip ~/docs
-          zip -r ${{ github.workspace }}/headers.zip ~/v8/v8/include
+          cd ~/docs/html
+          zip -r ${{ github.workspace }}/docs.zip .
+          cd ~/v8/v8/include
+          zip -r ${{ github.workspace }}/headers.zip .
           cp ~/v8/v8/LICENSE.v8 ${{ github.workspace }}/LICENSE.v8
       - name: Upload Documentation
         uses: actions/upload-release-asset@v1
