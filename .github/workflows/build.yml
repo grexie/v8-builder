@@ -68,6 +68,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           bash ./builders/v8.sh
+          cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
           SCHEME: ${{ matrix.scheme }}
@@ -79,7 +80,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ~/v8/v8.zip
+          asset_path: ${{ github.workspace }}/v8.zip
           asset_name:
             v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme
             }}-${{ needs.version_reader.outputs.version }}.zip
@@ -97,15 +98,16 @@ jobs:
           sh ./builders/v8-docs.sh ${{ needs.version_reader.outputs.version }}
       - name: Build Archives
         run: |
-          zip -r ~/v8/docs.zip ~/docs
-          zip -r ~/v8/headers.zip ~/v8/v8/include
+          zip -r ${{ github.workspace }}/docs.zip ~/docs
+          zip -r ${{ github.workspace }}/headers.zip ~/v8/v8/include
+          cp ~/v8/v8/LICENSE.v8 ${{ github.workspace }}/LICENSE.v8
       - name: Upload Documentation
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ~/v8/docs.zip
+          asset_path: ${{ github.workspace }}/docs.zip
           asset_name: v8-docs-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
       - name: Upload Headers
@@ -114,7 +116,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ~/v8/headers.zip
+          asset_path: ${{ github.workspace }}/headers.zip
           asset_name: v8-headers-${{ needs.version_reader.outputs.version }}.zip
           asset_content_type: application/zip
       - name: Upload License
@@ -123,7 +125,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ~/v8/v8/LICENSE.v8
+          asset_path: ${{ github.workspace }}/LICENSE
           asset_name: LICENSE
           asset_content_type: text/plain
 
