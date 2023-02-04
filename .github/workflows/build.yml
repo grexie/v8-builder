@@ -34,8 +34,6 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
-            prereqs: |
-              echo -n
           - platform: macos
             platform_name: macOS
             os: macos-latest
@@ -43,8 +41,6 @@ jobs:
             arch_name: ARM64
             scheme: debug
             scheme_name: Debug
-            prereqs: |
-              echo -n
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -52,8 +48,6 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
-            prereqs: |
-
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -61,8 +55,6 @@ jobs:
             arch_name: x86-64
             scheme: release
             scheme_name: Release
-            prereqs: |
-              echo -n
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
