@@ -9,7 +9,7 @@ function platform_label {
 function copy_assets {
   find $(build_dir) -type f -name "*.so"
   find $(build_dir) -type f -name "*.a"
-  find $(build_dir) -type f -name "*.dat"
+  find $(build_dir) -type f -name "*.dat" | head -n1
   echo -n $(build_dir)/bytecode_builtins_list_generator
   echo -n $(build_dir)/gen-regexp-special-case
   echo -n $(build_dir)/mksnapshot
