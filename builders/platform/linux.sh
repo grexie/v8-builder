@@ -32,7 +32,7 @@ function platform_setup {
   if [ "${ARCH}" == "arm64" ]; then
     sudo apt-get install -y crossbuild-essential-arm64
   fi
-  
+
   if [ "${ARCH}" == "arm" ]; then
     sudo apt-get install -y crossbuild-essential-armhf
   fi
@@ -56,4 +56,16 @@ function platform_patches {
 
 function platform_build {
   echo -n
+}
+
+function platform_ninja {
+  if [ "${ARCH}" == "arm64" ]; then
+    ./build/linux/sysroot_scripts/install-sysroot.py --arch=arm64
+  fi
+  if [ "${ARCH}" == "arm" ]; then
+    ./build/linux/sysroot_scripts/install-sysroot.py --arch=arm
+  fi
+  if [ "${ARCH}" == "x86" ]; then
+    ./build/linux/sysroot_scripts/install-sysroot.py --arch=x86
+  fi
 }
