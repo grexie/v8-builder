@@ -28,6 +28,18 @@ function platform_setup {
       xz-utils \
       zip \
       ninja-build
+
+  if [ "${ARCH}" == "arm64" ]; then
+    sudo apt-get install -y crossbuild-essential-arm64
+  fi
+  
+  if [ "${ARCH}" == "arm" ]; then
+    sudo apt-get install -y crossbuild-essential-armhf
+  fi
+
+  if [ "${ARCH}" == "x86" ]; then
+    sudo apt-get install -y crossbuild-essential-i386
+  fi
 }
 
 function platform_requirements {
