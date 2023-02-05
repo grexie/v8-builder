@@ -38,7 +38,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: macos
             platform_name: macOS
             os: macos-latest
@@ -50,7 +50,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: macos
             platform_name: macOS
             os: macos-latest
@@ -62,7 +62,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -74,7 +74,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -86,7 +86,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: android
             platform_name: Android
             os: ubuntu-latest
@@ -98,7 +98,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: android
             platform_name: Android
             os: ubuntu-latest
@@ -110,7 +110,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
-              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
@@ -164,7 +164,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/v8.zip
+          asset_path: ${{ github.workspace }}\v8.zip
           asset_name:
             v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme
             }}-${{ needs.version_reader.outputs.version }}.zip
