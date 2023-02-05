@@ -75,19 +75,6 @@ jobs:
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
               cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
-          - platform: windows
-            platform_name: Windows
-            os: windows-latest
-            arch: x64
-            arch_name: x86-64
-            scheme: release
-            scheme_name: Release
-            shell_cmd: pwsh
-            command: |
-              cd $GITHUB_WORKSPACE
-              $GITHUB_WORKSPACE/builders/v8-windows.cmd ${{
-              needs.version_reader.outputs.version }} | Out-Default
-              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: android
             platform_name: Android
             os: ubuntu-latest
@@ -123,6 +110,37 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run build script
         run: ${{ matrix.command }}
+        env:
+          VERSION: ${{ needs.version_reader.outputs.version }}
+          SCHEME: ${{ matrix.scheme }}
+          PLATFORM: ${{ matrix.platform }}
+          ARCH: ${{ matrix.arch }}
+      - name: Upload Build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/v8.zip
+          asset_name:
+            v8-${{ matrix.platform }}-${{ matrix.arch }}-${{ matrix.scheme
+            }}-${{ needs.version_reader.outputs.version }}.zip
+          asset_content_type: application/zip
+
+  build_windows:
+    name: Build Release Windows x86-64
+    runs-on: windows-latest
+    needs: [version_reader, create_release]
+    outputs:
+      artifact: ${{ steps.artifact.outputs.artifact }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run build script
+        shell: cmd
+        run: |
+          cd %GITHUB_WORKSPACE%
+          ./builders/v8-windows.cmd ${{ needs.version_reader.outputs.version }}
+          cp %HOMEPATH%/v8/v8.zip %GITHUB_WORKSPACE%/v8.zip
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
           SCHEME: ${{ matrix.scheme }}
