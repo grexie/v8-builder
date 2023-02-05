@@ -86,7 +86,7 @@ jobs:
             command: |
               cd $GITHUB_WORKSPACE
               Start-Process ./builders/v8-windows.cmd -NoNewWindow -Wait ${{
-              needs.version_reader.outputs.version }}
+              needs.version_reader.outputs.version }} | Out-Default
               cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: android
             platform_name: Android
