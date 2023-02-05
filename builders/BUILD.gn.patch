@@ -1,17 +1,12 @@
-diff --git a/BUILD.gn b/BUILD.gn
-index d2bfb61..72ea7b3 100644
---- a/BUILD.gn
-+++ b/BUILD.gn
-@@ -1054,7 +1054,11 @@ config("toolchain") {
-   }
- 
+--- BUILD.gn    2023-02-05 16:54:02
++++ BUILD.modified.gn   2023-02-05 16:55:41
+@@ -1294,7 +1294,8 @@
    if (is_clang) {
--    cflags += [ "-Wmissing-field-initializers" ]
-+    cflags += [
-+      "-Wmissing-field-initializers",
-+      "-Wno-invalid-offsetof", # Use of "conditionally-supported" offsetof in c++17
+     cflags += [
+       "-Wmissing-field-initializers",
+-
++      "-Wno-invalid-offsetof",
 +      "-Wno-range-loop-construct",
-+    ]
- 
-     if (v8_current_cpu != "mips" && v8_current_cpu != "mipsel") {
-       # We exclude MIPS because the IsMipsArchVariant macro causes trouble.
+       # TODO(v8:12245): Fix shadowing instances and remove.
+       "-Wno-shadow",
+     ]
