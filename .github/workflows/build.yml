@@ -82,10 +82,10 @@ jobs:
             arch_name: x86-64
             scheme: release
             scheme_name: Release
-            shell_cmd: cmd
+            shell_cmd: pwsh
             command: |
               cd %GITHUB_WORKSPACE%
-              call ./builders/v8-windows.cmd ${{
+              cmd ./builders/v8-windows.cmd ${{
               needs.version_reader.outputs.version }}
               cp %HOMEPATH%/v8/v8.zip %GITHUB_WORKSPACE%/v8.zip
           - platform: android
