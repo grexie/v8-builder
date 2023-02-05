@@ -34,7 +34,11 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
-            command: bash ./builders/v8.sh
+            shell: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
           - platform: macos
             platform_name: macOS
             os: macos-latest
@@ -42,7 +46,11 @@ jobs:
             arch_name: ARM64
             scheme: debug
             scheme_name: Debug
-            command: bash ./builders/v8.sh
+            shell: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -50,7 +58,11 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
-            command: bash ./builders/v8.sh
+            shell: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -58,7 +70,11 @@ jobs:
             arch_name: x86-64
             scheme: release
             scheme_name: Release
-            command: bash ./builders/v8.sh
+            shell: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
           - platform: windows
             platform_name: Windows
             os: windows-latest
@@ -66,9 +82,14 @@ jobs:
             arch_name: x86-64
             scheme: release
             scheme_name: Release
+            shell: cmd
             command:
+            shell: bash
+            command: |
+              cd %GITHUB_WORKSPACE%
               call ./builders/v8-windows.cmd ${{
               needs.version_reader.outputs.version }}
+              cp %HOMEPATH%/v8/v8.zip %GITHUB_WORKSPACE%/v8.zip
           - platform: android
             platform_name: Android
             os: ubuntu-latest
@@ -76,7 +97,11 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
-            command: bash ./builders/v8.sh
+            shell: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
           - platform: android
             platform_name: Android
             os: ubuntu-latest
@@ -84,7 +109,11 @@ jobs:
             arch_name: ARM
             scheme: release
             scheme_name: Release
-            command: bash ./builders/v8.sh
+            shell: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
@@ -95,10 +124,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run build script
-        run: |
-          cd $GITHUB_WORKSPACE
-          ${{ matrix.command }}
-          cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+        shell: ${{ matrix.shell }}
+        run: ${{ matrix.command }}
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
           SCHEME: ${{ matrix.scheme }}
