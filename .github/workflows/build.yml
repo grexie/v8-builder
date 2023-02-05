@@ -83,8 +83,6 @@ jobs:
             scheme: release
             scheme_name: Release
             shell: cmd
-            command:
-            shell: bash
             command: |
               cd %GITHUB_WORKSPACE%
               call ./builders/v8-windows.cmd ${{
