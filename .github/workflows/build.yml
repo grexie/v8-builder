@@ -85,7 +85,7 @@ jobs:
             shell_cmd: pwsh
             command: |
               cd $GITHUB_WORKSPACE
-              cmd ./builders/v8-windows.cmd ${{
+              ./builders/v8-windows.cmd ${{
               needs.version_reader.outputs.version }}
               cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: android
