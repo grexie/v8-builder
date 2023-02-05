@@ -42,6 +42,18 @@ jobs:
           - platform: macos
             platform_name: macOS
             os: macos-latest
+            arch: x64
+            arch_name: x86-64
+            scheme: release
+            scheme_name: Release
+            shell_cmd: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
+          - platform: macos
+            platform_name: macOS
+            os: macos-latest
             arch: arm64
             arch_name: ARM64
             scheme: debug
