@@ -1,5 +1,5 @@
 function build_dir {
-  echo -n ~/v8/v8/out.gn/$(arch_label).$(scheme_label)/clang_x64_v8_ia32/
+  echo -n ~/v8/v8/out.gn/$(arch_label).$(scheme_label)/clang_x64_v8_ia32
 }
 
 function arch_label {

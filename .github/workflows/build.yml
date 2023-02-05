@@ -34,6 +34,7 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
+            command: bash ./builders/v8.sh
           - platform: macos
             platform_name: macOS
             os: macos-latest
@@ -41,6 +42,7 @@ jobs:
             arch_name: ARM64
             scheme: debug
             scheme_name: Debug
+            command: bash ./builders/v8.sh
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -48,6 +50,7 @@ jobs:
             arch_name: ARM64
             scheme: release
             scheme_name: Release
+            command: bash ./builders/v8.sh
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
@@ -55,6 +58,33 @@ jobs:
             arch_name: x86-64
             scheme: release
             scheme_name: Release
+            command: bash ./builders/v8.sh
+          - platform: windows
+            platform_name: Windows
+            os: windows-latest
+            arch: x64
+            arch_name: x86-64
+            scheme: release
+            scheme_name: Release
+            command:
+              call ./builders/v8-windows.cmd ${{
+              needs.version_reader.outputs.version }}
+          - platform: android
+            platform_name: Android
+            os: ubuntu-latest
+            arch: arm64
+            arch_name: ARM64
+            scheme: release
+            scheme_name: Release
+            command: bash ./builders/v8.sh
+          - platform: android
+            platform_name: Android
+            os: ubuntu-latest
+            arch: arm
+            arch_name: ARM
+            scheme: release
+            scheme_name: Release
+            command: bash ./builders/v8.sh
     name:
       Build ${{ matrix.scheme_name }} ${{ matrix.platform_name }} ${{
       matrix.arch_name }}
@@ -67,7 +97,7 @@ jobs:
       - name: Run build script
         run: |
           cd $GITHUB_WORKSPACE
-          bash ./builders/v8.sh
+          ${{ matrix.command }}
           cp ~/v8/v8.zip ${{ github.workspace }}/v8.zip
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}

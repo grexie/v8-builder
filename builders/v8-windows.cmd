@@ -32,3 +32,6 @@ call python .\tools\dev\v8gen.py x64.release -vv -- target_os="""win""" is_compo
 
 call ninja -C out.gn\x64.release -t clean
 call ninja -C out.gn\x64.release v8
+
+cd out.gn\x64.release
+call 7z a depot_tools.zip -r *.dll *.lib *.exp *.ilk *.exe *.dat
