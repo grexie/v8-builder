@@ -122,7 +122,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run build script
-        shell: ${{ matrix.shell_cmd }}
         run: ${{ matrix.command }}
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
