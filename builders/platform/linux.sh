@@ -1,6 +1,4 @@
-function build_dir {
-  echo -n ~/v8/v8/out.gn/$(arch_label).$(scheme_label)
-}
+
 
 function platform_label {
   echo -n "linux"

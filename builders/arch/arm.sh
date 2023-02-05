@@ -1,3 +1,6 @@
+function build_dir {
+  echo -n ~/v8/v8/out.gn/$(arch_label).$(scheme_label)/clang_x64_v8_arm/
+}
 
 function arch_label {
   echo -n "arm"
