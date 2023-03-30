@@ -15,6 +15,9 @@ function arch_additions {
   echo -n
 }
 
+function arch_corrections {
+  echo -n
+}
 
 function arch_build {
   if [ "${PLATFORM}" == "android" ]; then

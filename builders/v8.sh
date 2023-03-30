@@ -51,6 +51,7 @@ symbol_level = 1
 $(platform_additions)
 $(arch_additions)
 "
+arch_corrections
 platform_ninja
 ninja -C out.gn/$(arch_label).$(scheme_label) -t clean
 ninja -C out.gn/$(arch_label).$(scheme_label) v8
