@@ -16,7 +16,7 @@ function arch_additions {
 }
 
 function arch_corrections {
-  sed -i '' -e '/^.*target_cpu *= *"x64".*$/d' ~/v8/v8/out.gn/$(arch.label).$(scheme_label)/args.gn
+  sed -i '' -e '/^ *target_cpu *= *"x64".*$/d' ~/v8/v8/out.gn/$(arch_label).$(scheme_label)/args.gn
 }
 
 function arch_build {
