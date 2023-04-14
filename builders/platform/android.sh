@@ -41,3 +41,7 @@ function platform_patches {
 function platform_build {
   echo -n
 }
+
+function platform_ninja {
+  echo -n
+}
