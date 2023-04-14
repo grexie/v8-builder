@@ -39,7 +39,7 @@ arch_patches
 echo "=====[ Building V8 ]====="
 python ./tools/dev/v8gen.py $(arch_label).$(scheme_label) -vv -- "
 target_os = \"$(platform_label)\"
-is_clang=true
+is_clang=false
 is_component_build = false
 use_custom_libcxx = false
 v8_enable_i18n_support = true
@@ -47,9 +47,9 @@ v8_static_library = true
 v8_use_external_startup_data = false
 target_cpu = \"$(arch_label)\"
 v8_target_cpu = \"$(arch_label)\"
-symbol_level = 1
 $(platform_additions)
 $(arch_additions)
+$(scheme_additions)
 "
 arch_corrections
 platform_ninja
