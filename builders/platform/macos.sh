@@ -17,7 +17,7 @@ function platform_setup {
 }
 
 function platform_requirements {
-  ./build/install-build-deps.sh --no-syms --no-nacl --no-prompt
+  echo -n
 }
 
 function platform_additions {
