@@ -33,6 +33,8 @@ platform_requirements
 git checkout $VERSION
 gclient sync
 
+set -e
+
 platform_patches
 arch_patches
 
@@ -43,7 +45,7 @@ is_clang = true
 is_component_build = false
 use_custom_libcxx = false
 v8_enable_i18n_support = true
-v8_static_library = true
+v8_monolithic = true
 v8_use_external_startup_data = false
 target_cpu = \"$(arch_label)\"
 v8_target_cpu = \"$(arch_label)\"
@@ -54,8 +56,7 @@ $(scheme_additions)
 arch_corrections
 platform_ninja
 ninja -C out.gn/$(arch_label).$(scheme_label) -t clean
-ninja -C out.gn/$(arch_label).$(scheme_label) v8
-ninja -C out.gn/$(arch_label).$(scheme_label) v8_libplatform
+ninja -C out.gn/$(arch_label).$(scheme_label) v8_monolith
 
 platform_build
 arch_build
