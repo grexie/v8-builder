@@ -49,11 +49,12 @@ v8_monolithic = true
 v8_use_external_startup_data = false
 target_cpu = \"$(arch_label)\"
 v8_target_cpu = \"$(arch_label)\"
-v8_enable_pointer_compression = false
+icu_use_data_file = false
 $(platform_additions)
 $(arch_additions)
 $(scheme_additions)
 "
+# v8_enable_pointer_compression = false
 arch_corrections
 platform_ninja
 ninja -C out.gn/$(arch_label).$(scheme_label) -t clean
