@@ -44,12 +44,15 @@ target_os = \"$(platform_label)\"
 is_clang = true
 is_component_build = false
 use_custom_libcxx = false
-v8_enable_i18n_support = true
+v8_enable_i18n_support = false
+clang_use_chrome_plugins = false
+v8_enable_test_features = false
+treat_warnings_as_errors = false
+v8_static_library = true
 v8_monolithic = true
 v8_use_external_startup_data = false
 target_cpu = \"$(arch_label)\"
 v8_target_cpu = \"$(arch_label)\"
-icu_use_data_file = false
 $(platform_additions)
 $(arch_additions)
 $(scheme_additions)
