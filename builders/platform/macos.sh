@@ -14,6 +14,7 @@ function copy_assets {
 
 function platform_setup {
   brew install ninja python@3.9
+  brew link --force python@3.9
 }
 
 function platform_requirements {
