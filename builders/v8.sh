@@ -39,7 +39,7 @@ platform_patches
 arch_patches
 
 echo "=====[ Building V8 ]====="
-python ./tools/dev/v8gen.py $(arch_label).$(scheme_label) -vv -- "
+python3 ./tools/dev/v8gen.py $(arch_label).$(scheme_label) -vv -- "
 target_os = \"$(platform_label)\"
 is_clang = true
 is_component_build = false
