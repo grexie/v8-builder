@@ -13,7 +13,7 @@ function copy_assets {
 }
 
 function platform_setup {
-  brew install ninja python@2
+  brew install ninja python@3.9
 }
 
 function platform_requirements {
