@@ -61,7 +61,7 @@ $(scheme_additions)
 arch_corrections
 platform_ninja
 ninja -C out.gn/$(arch_label).$(scheme_label) -t clean
-ninja -C out.gn/$(arch_label).$(scheme_label) v8_monolith
+ninja -j 8 -C out.gn/$(arch_label).$(scheme_label) v8_monolith
 
 platform_build
 arch_build
