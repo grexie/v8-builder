@@ -26,18 +26,18 @@ function platform_setup {
       xz-utils \
       zip \
       ninja-build \
-      libatomic1-arm64-cross
+      libatomic1
 
   if [ "${ARCH}" == "arm64" ]; then
-    sudo apt-get install -y crossbuild-essential-arm64
+    sudo apt-get install -y crossbuild-essential-arm64 libatomic1-arm64-cross
   fi
 
   if [ "${ARCH}" == "arm" ]; then
-    sudo apt-get install -y crossbuild-essential-armhf
+    sudo apt-get install -y crossbuild-essential-armhf libatomic1-armhf-cross
   fi
 
   if [ "${ARCH}" == "x86" ]; then
-    sudo apt-get install -y crossbuild-essential-i386
+    sudo apt-get install -y crossbuild-essential-i386 libatomic1-i386-cross
   fi
 }
 
