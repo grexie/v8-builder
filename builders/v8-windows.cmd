@@ -24,7 +24,7 @@ echo target_os = ['win'] >> .gclient
 cd v8
 call git checkout %VERSION%
 call gclient sync
-call patch --ignore-whitespace --verbose -p0 < %GITHUB_WORKSPACE%\builders\BUILD.gn.patch
+echo call patch --ignore-whitespace --verbose -p0 < %GITHUB_WORKSPACE%\builders\BUILD.gn.patch
 
 
 echo =====[ Building V8 ]=====
