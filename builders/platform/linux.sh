@@ -25,7 +25,8 @@ function platform_setup {
       python2 \
       xz-utils \
       zip \
-      ninja-build
+      ninja-build \
+      libatomic1-arm64-cross
 
   if [ "${ARCH}" == "arm64" ]; then
     sudo apt-get install -y crossbuild-essential-arm64
