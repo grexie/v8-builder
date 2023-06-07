@@ -47,6 +47,7 @@ use_custom_libcxx = false
 v8_enable_i18n_support = false
 clang_use_chrome_plugins = false
 v8_enable_test_features = false
+v8_enable_sandbox = false
 treat_warnings_as_errors = false
 v8_static_library = true
 v8_monolithic = true
