@@ -34,4 +34,4 @@ call ninja -C out.gn\x64.release -t clean
 call ninja -C out.gn\x64.release v8_monolith
 
 cd out.gn\x64.release
-call 7z a depot_tools.zip -r *.dll *.lib *.exp *.ilk *.exe *.dat
+call 7z a v8.zip -r *.dll *.lib *.exp *.ilk *.exe *.dat
