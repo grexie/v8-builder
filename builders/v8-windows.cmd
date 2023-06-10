@@ -34,4 +34,4 @@ call ninja -C out.gn\x64.release -t clean
 call ninja -C out.gn\x64.release v8_monolith
 
 cd out.gn\x64.release
-call 7z a %HOMEPATH%\v8\v8.zip -r *.dll *.lib *.exp *.ilk *.exe *.dat
+call 7z a %GITHUB_WORKSPACE%\v8.zip -r *.dll *.lib *.exp *.ilk *.exe *.dat
