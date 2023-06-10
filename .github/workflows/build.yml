@@ -152,7 +152,8 @@ jobs:
         shell: cmd
         run: |
           ./builders/v8-windows.cmd ${{ needs.version_reader.outputs.version }}
-          cp %HOMEPATH%/v8/v8.zip ./v8.zip
+          echo "HERE"
+          cp %HOMEPATH%/v8/v8.zip ${{ github.workspace }}/v8.zip
         env:
           VERSION: ${{ needs.version_reader.outputs.version }}
           SCHEME: ${{ matrix.scheme }}
