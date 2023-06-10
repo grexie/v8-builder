@@ -1,6 +1,6 @@
 
 function platform_label {
-  echo -n mac
+  echo -n ios
 }
 
 function copy_assets {
