@@ -63,6 +63,30 @@ jobs:
               cd $GITHUB_WORKSPACE
               bash ./builders/v8.sh
               cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
+          - platform: ios
+            platform_name: iOS
+            os: macos-latest
+            arch: arm64
+            arch_name: ARM64
+            scheme: release
+            scheme_name: Release
+            shell_cmd: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
+          - platform: ios
+            platform_name: iOS
+            os: macos-latest
+            arch: x64
+            arch_name: x86-64
+            scheme: release
+            scheme_name: Release
+            shell_cmd: bash
+            command: |
+              cd $GITHUB_WORKSPACE
+              bash ./builders/v8.sh
+              cp ~/v8/v8.zip $GITHUB_WORKSPACE/v8.zip
           - platform: linux
             platform_name: Linux
             os: ubuntu-latest
