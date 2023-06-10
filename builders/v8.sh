@@ -1,5 +1,5 @@
 #!/bin/bash -x
-
+set -x
 ROOTDIR=$(pwd)
 
 . builders/platform/${PLATFORM}.sh
