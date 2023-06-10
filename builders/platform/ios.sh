@@ -21,7 +21,7 @@ function platform_requirements {
 }
 
 function platform_additions {
-  echo -n
+  echo "v8_enable_pointer_compression = false"
 }
 
 function platform_patches {
