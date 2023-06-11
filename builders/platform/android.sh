@@ -4,10 +4,10 @@ function platform_label {
 }
 
 function copy_assets {
+  rm -Rf $(build_dir)/clang_*
   find $(build_dir) -type f -name "*.so"
   find $(build_dir) -type f -name "*.a"
   find $(build_dir) -type f -name "*.dat"
-  rm -Rf $(build_dir)/clang_*
 }
 
 function platform_setup {
