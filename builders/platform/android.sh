@@ -7,10 +7,7 @@ function copy_assets {
   find $(build_dir) -type f -name "*.so"
   find $(build_dir) -type f -name "*.a"
   find $(build_dir) -type f -name "*.dat"
-  echo $(build_dir)/clang_*/bytecode_builtins_list_generator
-  echo $(build_dir)/clang_*/gen-regexp-special-case
-  echo $(build_dir)/clang_*/mksnapshot
-  echo $(build_dir)/clang_*/torque
+  rm -Rf $(build_dir)/clang_*
 }
 
 function platform_setup {
