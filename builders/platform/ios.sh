@@ -4,6 +4,7 @@ function platform_label {
 }
 
 function copy_assets {
+  rm -Rf $(build_dir)/clang_*
   find $(build_dir) -type f -name "*.dylib"
   find $(build_dir) -type f -name "*.a"
   find $(build_dir) -type f -name "*.dat" | head -n1
