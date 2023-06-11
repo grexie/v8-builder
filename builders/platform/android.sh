@@ -11,6 +11,7 @@ function copy_assets {
 }
 
 function platform_setup {
+  sudo apt-get update
   sudo apt-get install -y \
       pkg-config \
       git \
