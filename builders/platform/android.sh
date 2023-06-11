@@ -23,7 +23,20 @@ function platform_setup {
       build-essential \
       python2 \
       xz-utils \
-      zip
+      zip \
+      libatomic1
+
+  if [ "${ARCH}" == "arm64" ]; then
+    sudo apt-get install -y crossbuild-essential-arm64 libatomic1-arm64-cross
+  fi
+
+  if [ "${ARCH}" == "arm" ]; then
+    sudo apt-get install -y crossbuild-essential-armhf libatomic1-armhf-cross
+  fi
+
+  if [ "${ARCH}" == "x86" ]; then
+    sudo apt-get install -y crossbuild-essential-i386 libatomic1-i386-cross
+  fi
 }
 
 function platform_requirements {
