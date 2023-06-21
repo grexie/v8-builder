@@ -51,7 +51,6 @@ treat_warnings_as_errors = false
 v8_static_library = true
 v8_monolithic = true
 v8_use_external_startup_data = false
-v8_enable_webassembly = true
 target_cpu = \"$(arch_label)\"
 v8_target_cpu = \"$(arch_label)\"
 $(platform_additions)
