@@ -25,6 +25,7 @@ function platform_additions {
   echo "v8_enable_pointer_compression = false"
   echo "is_clang = true"
   echo "ios_deployment_target = 10"
+  echo "v8_jitless = true"
 }
 
 function platform_patches {
