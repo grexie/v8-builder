@@ -42,7 +42,7 @@ echo "=====[ Building V8 ]====="
 python3 ./tools/dev/v8gen.py $(arch_label).$(scheme_label) -vv -- "
 target_os = \"$(platform_label)\"
 is_component_build = false
-use_custom_libcxx = false
+use_custom_libcxx = true
 v8_enable_i18n_support = false
 clang_use_chrome_plugins = false
 v8_enable_test_features = false
