@@ -27,6 +27,12 @@ function platform_additions {
   echo "ios_deployment_target = 10"
   echo "target_is_ios_device = true"
   echo "v8_enable_lite_mode = true"
+
+  if [ "${ARCH}" == "arm" ]; then
+    echo "use_custom_libcxx = true"
+  else
+    echo "use_custom_libcxx = false"
+  fi
 }
 
 function platform_patches {
