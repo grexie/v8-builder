@@ -64,6 +64,7 @@ function platform_ninja {
   fi
   if [ "${ARCH}" == "arm" ]; then
     ./build/linux/sysroot_scripts/install-sysroot.py --arch=arm
+    export LD_LIBRARY_PATH=/usr/arm-linux-gnueabihf/lib/
   fi
   if [ "${ARCH}" == "x86" ]; then
     ./build/linux/sysroot_scripts/install-sysroot.py --arch=x86
