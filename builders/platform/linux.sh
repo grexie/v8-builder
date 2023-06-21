@@ -48,10 +48,6 @@ function platform_requirements {
 
 function platform_additions {
   echo "is_clang = true"
-
-  if [ "${ARCH}" == "arm" ]; then
-    echo "use_sysroot = false"
-  fi
 }
 
 function platform_patches {
