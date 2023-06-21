@@ -21,7 +21,7 @@ function platform_requirements {
 }
 
 function platform_additions {
-  echo -n
+  echo "is_clang = true"
 }
 
 function platform_patches {
