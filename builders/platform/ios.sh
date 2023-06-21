@@ -23,7 +23,8 @@ function platform_requirements {
 
 function platform_additions {
   echo "v8_enable_pointer_compression = false"
-  echo "is_clang = false"
+  echo "is_clang = true"
+  echo "v8_enable_turbofan = true"
 }
 
 function platform_patches {
