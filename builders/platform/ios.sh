@@ -23,7 +23,6 @@ function platform_requirements {
 
 function platform_additions {
   echo "v8_enable_pointer_compression = false"
-  echo "code_signing = false"
 }
 
 function platform_patches {
