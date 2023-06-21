@@ -22,6 +22,12 @@ function platform_requirements {
 
 function platform_additions {
   echo "is_clang = true"
+
+  if [ "${ARCH}" == "arm" ]; then
+    echo "use_custom_libcxx = true"
+  else
+    echo "use_custom_libcxx = false"
+  fi
 }
 
 function platform_patches {
