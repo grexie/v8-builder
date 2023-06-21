@@ -23,7 +23,7 @@ function platform_requirements {
 
 function platform_additions {
   echo "v8_enable_pointer_compression = false"
-  echo "is_clang = true"
+  echo "is_clang = false"
   echo "ios_deployment_target = 10"
   echo "target_is_ios_device = true"
   echo "v8_enable_lite_mode = true"
